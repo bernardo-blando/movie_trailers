@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    
+    <script src="jquery-3.5.1.min.js"></script>
+    <script>
+        var user_email = 'bernardoblando@ua.pt';
+        var user_password = '123';
+        
+        function loginApi() {
+            $.ajax({
+                url: "http://52.15.37.213/revistaRad/public/REVISTARAD/index.php/AccessControl/login",
+                method: 'POST',
+                data: {'email' : user_email, 'password':user_password},
+                })
+                .done(function( data ) {
+                    localStorage.setItem('user_token_jwt', data.data);
+            });
+        }
+5
+        function verifyAcess(){
+            $.ajax({
+                url: "http://52.15.37.213/revistaRad/public/REVISTARAD/index.php/AccessControl/verifyacess",
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0ZUBnbWFpbC5jb20iLCJuYW1lIjoiYmVybmFyZG8ifQ.abrWp - WO1kP33tf_c6UeLBhItGzOdiS7fLdTOR2wnmw'
+                },
+                })
+                .done(function( data ) {
+                    console.log(data);
+            });
+        }
+    </script>
+</body>
+</html>
